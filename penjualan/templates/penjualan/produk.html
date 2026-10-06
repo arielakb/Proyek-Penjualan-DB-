@@ -1,0 +1,15 @@
+{% extends "penjualan/base.html" %}{% block content %}
+<h2>Produk</h2>
+<form method="get"><input name="q" value="{{ q }}" placeholder="Cari nama produk"><button>Cari</button></form>
+<div class="box"><b>Tambah produk</b>
+<form method="post" action="{% url 'produk_tambah' %}">{% csrf_token %}
+<input name="nama" placeholder="Nama produk" required> <input name="harga" type="number" min="0" step="0.01" placeholder="Harga" required>
+<input name="stok" type="number" min="0" placeholder="Stok" required> <button>Simpan</button></form></div>
+<table><tr><th>ID</th><th>Nama</th><th>Harga</th><th>Stok</th><th>Aksi</th></tr>
+{% for r in data %}<tr><td>{{ r.id_produk }}</td>
+<td><input form="u{{ r.id_produk }}" name="nama" value="{{ r.nama_produk }}" required></td>
+<td><input form="u{{ r.id_produk }}" name="harga" type="number" min="0" step="0.01" value="{{ r.harga|stringformat:'s' }}" required></td>
+<td><input form="u{{ r.id_produk }}" name="stok" type="number" min="0" value="{{ r.stok }}" required></td>
+<td><form class="inline" id="u{{ r.id_produk }}" method="post" action="{% url 'produk_ubah' r.id_produk %}">{% csrf_token %}<button>Ubah</button></form>
+<form class="inline" method="post" action="{% url 'produk_hapus' r.id_produk %}" onsubmit="return confirm('Hapus produk?')">{% csrf_token %}<button>Hapus</button></form></td></tr>{% endfor %}</table>
+{% endblock %}

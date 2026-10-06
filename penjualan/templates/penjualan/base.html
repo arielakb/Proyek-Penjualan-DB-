@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="id"><head><meta charset="utf-8"><title>Penjualan</title>
+<style>
+body{font-family:Arial,sans-serif;margin:0;background:#f4f6f9;color:#222}
+nav{background:#1f3864;padding:10px 24px}nav a{color:#fff;margin-right:18px;text-decoration:none;font-size:14px}
+main{max-width:1000px;margin:20px auto;padding:0 16px}
+table{border-collapse:collapse;width:100%;background:#fff;margin:10px 0}
+th,td{border:1px solid #d0d5dd;padding:6px 8px;font-size:13px;text-align:left}th{background:#e8edf5}
+input,select{padding:5px;font-size:13px}button{padding:5px 12px;font-size:13px;cursor:pointer}
+.box{background:#fff;padding:12px;border:1px solid #d0d5dd;margin:10px 0}
+.success{background:#e3f6e6;padding:8px;margin:6px 0;border-left:4px solid #2e9e45}
+.error{background:#fde8e8;padding:8px;margin:6px 0;border-left:4px solid #c62828}
+.r{text-align:right}form.inline{display:inline}
+</style></head><body>
+{% if request.session.user %}<nav><a href="{% url 'index' %}">Dashboard</a><a href="{% url 'pelanggan' %}">Pelanggan</a>
+<a href="{% url 'produk' %}">Produk</a><a href="{% url 'penjualan' %}">Penjualan</a>
+<a href="{% url 'logout' %}" style="float:right">Keluar ({{ request.session.user }})</a></nav>{% endif %}
+<main>{% for m in messages %}<div class="{{ m.tags }}">{{ m }}</div>{% endfor %}
+{% block content %}{% endblock %}</main></body></html>

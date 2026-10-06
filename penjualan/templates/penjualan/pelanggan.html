@@ -1,0 +1,16 @@
+{% extends "penjualan/base.html" %}{% block content %}
+<h2>Pelanggan</h2>
+<form method="get"><input name="q" value="{{ q }}" placeholder="Cari nama/email"><button>Cari</button></form>
+<div class="box"><b>Tambah pelanggan</b>
+<form method="post" action="{% url 'pelanggan_tambah' %}">{% csrf_token %}
+<input name="nama" placeholder="Nama" required> <input name="alamat" placeholder="Alamat">
+<input name="telepon" placeholder="Telepon"> <input name="email" placeholder="Email"> <button>Simpan</button></form></div>
+<table><tr><th>ID</th><th>Nama</th><th>Alamat</th><th>Telepon</th><th>Email</th><th>Aksi</th></tr>
+{% for r in data %}<tr><td>{{ r.id_pelanggan }}</td>
+<td><input form="u{{ r.id_pelanggan }}" name="nama" value="{{ r.nama }}" required></td>
+<td><input form="u{{ r.id_pelanggan }}" name="alamat" value="{{ r.alamat|default_if_none:'' }}"></td>
+<td><input form="u{{ r.id_pelanggan }}" name="telepon" value="{{ r.telepon|default_if_none:'' }}"></td>
+<td><input form="u{{ r.id_pelanggan }}" name="email" value="{{ r.email|default_if_none:'' }}"></td>
+<td><form class="inline" id="u{{ r.id_pelanggan }}" method="post" action="{% url 'pelanggan_ubah' r.id_pelanggan %}">{% csrf_token %}<button>Ubah</button></form>
+<form class="inline" method="post" action="{% url 'pelanggan_hapus' r.id_pelanggan %}" onsubmit="return confirm('Hapus pelanggan?')">{% csrf_token %}<button>Hapus</button></form></td></tr>{% endfor %}</table>
+{% endblock %}

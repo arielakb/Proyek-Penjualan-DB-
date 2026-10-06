@@ -1,0 +1,9 @@
+{% extends "penjualan/base.html" %}{% block content %}
+<h2>Dashboard</h2>
+<h3>Ringkasan per Pelanggan</h3>
+<table><tr><th>Pelanggan</th><th>Jumlah transaksi</th><th class="r">Total belanja</th></tr>
+{% for r in pelanggan %}<tr><td>{{ r.nama }}</td><td>{{ r.jumlah_transaksi }}</td><td class="r">{{ r.total_belanja|rupiah }}</td></tr>{% endfor %}</table>
+<h3>Ringkasan per Produk</h3>
+<table><tr><th>Produk</th><th>Stok</th><th>Terjual</th><th class="r">Pendapatan</th></tr>
+{% for r in produk %}<tr><td>{{ r.nama_produk }}</td><td>{{ r.stok }}</td><td>{{ r.total_terjual }}</td><td class="r">{{ r.total_pendapatan|rupiah }}</td></tr>{% endfor %}</table>
+{% endblock %}

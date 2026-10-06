@@ -1,0 +1,11 @@
+{% extends "penjualan/base.html" %}{% block content %}
+<h2>Transaksi Penjualan Baru</h2>
+<form method="post" class="box">{% csrf_token %}
+<p>Pelanggan: <select name="id_pelanggan" required>{% for p in pelanggan %}<option value="{{ p.id_pelanggan }}">{{ p.nama }}</option>{% endfor %}</select></p>
+<table id="items"><tr><th>Produk</th><th>Jumlah</th></tr></table>
+<template id="baris"><tr><td><select name="id_produk">{% for p in produk %}<option value="{{ p.id_produk }}">{{ p.nama_produk }} (stok {{ p.stok }}, {{ p.harga|rupiah }})</option>{% endfor %}</select></td>
+<td><input name="jumlah" type="number" min="1" value="1"></td></tr></template>
+<p><button type="button" onclick="tambah()">+ Tambah item</button> <button>Simpan transaksi</button></p></form>
+<p>Harga, subtotal, total, dan pengurangan stok dihitung oleh database (trigger).</p>
+<script>function tambah(){document.querySelector('#items').appendChild(document.querySelector('#baris').content.cloneNode(true))}tambah();</script>
+{% endblock %}

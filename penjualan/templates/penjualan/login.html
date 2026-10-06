@@ -1,0 +1,6 @@
+{% extends "penjualan/base.html" %}{% block content %}
+<div class="box" style="max-width:320px;margin:60px auto"><h3>Masuk</h3>
+<form method="post">{% csrf_token %}
+<p><input name="username" placeholder="Username" required style="width:95%"></p>
+<p><input name="password" type="password" placeholder="Password" required style="width:95%"></p>
+<button>Masuk</button></form></div>{% endblock %}

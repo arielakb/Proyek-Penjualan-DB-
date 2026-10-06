@@ -1,0 +1,10 @@
+{% extends "penjualan/base.html" %}{% block content %}
+<h2>Penjualan</h2>
+<p><a href="{% url 'penjualan_baru' %}"><button>+ Transaksi baru</button></a></p>
+<form method="get" class="box">Dari <input type="date" name="dari" value="{{ dari }}"> Sampai <input type="date" name="sampai" value="{{ sampai }}">
+Pelanggan <input name="nama" value="{{ nama }}"> <button>Cari</button></form>
+<table><tr><th>ID</th><th>Tanggal</th><th>Pelanggan</th><th class="r">Total</th><th>Aksi</th></tr>
+{% for r in data %}<tr><td>{{ r.id_penjualan }}</td><td>{{ r.tanggal|date:"Y-m-d H:i" }}</td><td>{{ r.nama_pelanggan }}</td>
+<td class="r">{{ r.total|rupiah }}</td><td><a href="{% url 'penjualan_detail' r.id_penjualan %}">Detail</a>
+<form class="inline" method="post" action="{% url 'penjualan_batal' r.id_penjualan %}" onsubmit="return confirm('Batalkan transaksi?')">{% csrf_token %}<button>Batalkan</button></form></td></tr>{% endfor %}</table>
+{% endblock %}

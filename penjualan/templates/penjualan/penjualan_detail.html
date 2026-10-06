@@ -1,0 +1,8 @@
+{% extends "penjualan/base.html" %}{% block content %}
+<h2>Penjualan #{{ h.id_penjualan }}</h2>
+<p>Tanggal: {{ h.tanggal|date:"Y-m-d H:i" }}<br>Pelanggan: {{ h.nama_pelanggan }}</p>
+<table><tr><th>Produk</th><th>Jumlah</th><th class="r">Harga satuan</th><th class="r">Subtotal</th></tr>
+{% for d in detail %}<tr><td>{{ d.nama_produk }}</td><td>{{ d.jumlah }}</td><td class="r">{{ d.harga_satuan|rupiah }}</td><td class="r">{{ d.subtotal|rupiah }}</td></tr>{% endfor %}
+<tr><th colspan="3" class="r">Total</th><th class="r">{{ h.total|rupiah }}</th></tr></table>
+<a href="{% url 'penjualan' %}">Kembali</a>
+{% endblock %}
